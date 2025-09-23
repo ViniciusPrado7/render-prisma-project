@@ -24,6 +24,14 @@ jobs:
       - name: Generate Prisma Client
         run: npx prisma generate
 
+      - name: Debug secrets (seguro)
+        run: |
+          echo "Tamanho do Service ID: ${#RENDER_SERVICE_ID}"
+          echo "Tamanho da API Key: ${#RENDER_API_KEY}"
+        env:
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+
       - name: Deploy to Render
         uses: johnbeynon/render-deploy-action@v0.0.8
         with: 
